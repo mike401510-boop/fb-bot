@@ -1,10 +1,12 @@
+import os
 import asyncio
 import random
 import string
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 
-TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+# Берём токен из настроек Render Environment Variables
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 dp = Dispatcher()
