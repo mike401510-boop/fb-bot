@@ -25,9 +25,15 @@ def generate_random_comments(count=4, length=3) -> list:
 
 @dp.message(Command("start"))
 async def start_cmd(message: types.Message):
-    await message.answer("Бот работает!")
+    await message.answer("Бот на связи! Напиши /generate, чтобы получить случайный комментарий.")
 
-# Заглушка для Render, чтобы он видел открытый порт
+@dp.message(Command("generate"))
+async def generate_cmd(message: types.Message):
+    comments = generate_random_comments()
+    text = "Сгенерированные комментарии:\n" + "\n".join(comments)
+    await message.answer(text)
+
+# Веб-сервер для порта Render
 async def handle(request):
     return web.Response(text="Bot is running!")
 
