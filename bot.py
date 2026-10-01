@@ -3,28 +3,34 @@ import random
 import string
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-TELEGRAM_BOT_TOKEN = "8874686441:AAGd4ifMyfdJQxmYaqJDBeXKM9OFL15YhIg"
-YOUR_TELEGRAM_CHAT_ID = 7304980225  # Вставьте ваш ID из userinfobot
+TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
 
 bot = Bot(token=TELEGRAM_BOT_TOKEN)
 dp = Dispatcher()
 
-def generate_random_comments(count=4, length=3) -> list[str]:
-    letters = string.ascii_lowercase + "абвгдежзийклмнопрстуфхцчшщэюя"
-        emojis = ["🔥", "👍", "❤️", "👏", "🙌", "💯", "😀"]
-            
-                comments = []
-                    for _ in range(count - 1):
-                            rand_str = ''.join(random.choice(letters) for _ in range(length))
-                                    comments.append(rand_str)
-                                        
-                                            comments.append(random.choice(emojis))
-                                                return comments
+def generate_random_comments(count=4, length=3) -> list:
+    letters = string.ascii_lowercase + "абвгдежзийклмнопрстуфхцчшщъыьэюя"
+    emojis = ["🔥", "👍", "❤️", "👏", "🙌", "💯", "😀"]
 
-                                                async def send_post_notification(post_url: str):
-                                                    comment_options = generate_random_comments(count=4, length=3)
+    comments = []
+    for _ in range(count - 1):
+        rand_str = ''.join(random.choice(letters) for _ in range(length))
+        comments.append(rand_str)
+
+    comments.append(random.choice(emojis))
+    return comments
+
+@dp.message(Command("start"))
+async def start_cmd(message: types.Message):
+    await message.answer("Бот работает!")
+
+async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+    
                                                         
                                                             text = (
                                                                         f"🔔 **Новый пост!**\n\n"
@@ -62,4 +68,4 @@ def generate_random_comments(count=4, length=3) -> list[str]:
                                                                                                             asyncio.run(main())
 
                                                                                         ]
-                                                            )
+                                               
